@@ -1,0 +1,23 @@
+version: "3.8"
+
+services:
+  sqlpreview:
+    image: mcr.microsoft.com/mssql/server:2022-preview-ubuntu-22.04
+    container_name: sqlpreview
+    hostname: sqlpreview
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: 12345678AB&Ya
+      MSSQL_PID: Evaluation
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver-data:/var/opt/mssql
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  sqlserver-data:
