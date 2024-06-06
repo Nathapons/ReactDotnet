@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using backend.Data;
 using backend.Dtos;
+using backend.Interfaces;
 using backend.Mappers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,15 +17,18 @@ namespace backend.Controllers
     {
 
         private readonly ApplicationDBContext _context;
-        public StockController(ApplicationDBContext context)
+        private readonly IStockReprository _stockRepo;
+
+        public StockController(ApplicationDBContext context, IStockReprository stockReprository)
         {
+            _stockRepo = stockReprository;
             _context = context;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var stocks = await _context.Stocks.ToListAsync();
+            var stocks = await _stockRepo.GetAllAsync();
             var stockDto = stocks.Select(s => s.ToStockDto());
             return Ok(stocks);
         }
