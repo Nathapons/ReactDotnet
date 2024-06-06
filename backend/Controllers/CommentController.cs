@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using backend.Dtos;
 using backend.Interfaces;
 using backend.Mappers;
 using backend.Repository;
@@ -15,9 +16,12 @@ namespace backend.Controllers
     {
         private readonly ICommentRepository _commentRepo;
 
-        public CommentController(ICommentRepository commentRepo)
+        private readonly IStockReprository _stockRepo;
+
+        public CommentController(ICommentRepository commentRepo, IStockReprository stockRepo)
         {
             _commentRepo = commentRepo;
+            _stockRepo = stockRepo;
         }
 
         [HttpGet]
@@ -40,6 +44,19 @@ namespace backend.Controllers
 
             var commentDto = commentModel.ToCommentDto();
             return Ok(commentDto);
+        }
+
+        [HttpPost("{stockId}")]
+        public async Task<IActionResult> Create([FromRoute] int stockId, [FromBody] CreateCommentDto commentDto)
+        {
+            if (!await _stockRepo.StockExists(stockId))
+            {
+                return BadRequest("Stock does not exist");
+            }
+
+            var commentModel = commentDto.ToComment(stockId);
+            await _commentRepo.CreateCommentAsync(commentModel);
+            return CreatedAtAction(nameof(GetById), new {id = commentModel.Id}, commentModel.ToCommentDto());
         }
     }
 }

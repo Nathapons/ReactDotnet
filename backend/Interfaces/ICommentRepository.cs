@@ -11,5 +11,7 @@ namespace backend.Interfaces
         Task<List<Comment>> GetAllAsync();
 
         Task<Comment?> GetCommentByIdAsync(int id);
+
+        Task<Comment> CreateCommentAsync(Comment comment);
     }
 }

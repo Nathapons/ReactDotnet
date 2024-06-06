@@ -66,5 +66,10 @@ namespace backend.Repository
             await _context.SaveChangesAsync();
             return stockModel;
         }
+
+        public Task<bool> StockExists(int id)
+        {
+            return _context.Stocks.AnyAsync(x => x.Id == id);
+        }
     }
 }
