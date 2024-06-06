@@ -34,6 +34,6 @@ Install dependencies
 Start the server
 
 ```bash
-  dotnet run
+  dotnet watch run
 ```
 
