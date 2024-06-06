@@ -51,6 +51,11 @@ Go to the project directory
   cd backend
 ```
 
+Run MySQL Docker compose
+```bash
+  dotnet restore
+```
+
 Install dependencies
 
 ```bash
