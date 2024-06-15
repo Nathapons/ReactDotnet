@@ -53,7 +53,7 @@ Go to the project directory
 
 Run MySQL Docker compose
 ```bash
-  dotnet restore
+  sudo docker-compose up -d
 ```
 
 Install dependencies
@@ -65,6 +65,6 @@ Install dependencies
 Start the server
 
 ```bash
-  dotnet run
+  dotnet watch run
 ```
 
