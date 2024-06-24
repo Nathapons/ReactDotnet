@@ -54,7 +54,7 @@ namespace backend.Controllers
                 return BadRequest("Stock does not exist");
             }
 
-            var commentModel = commentDto.ToComment(stockId);
+            var commentModel = commentDto.ToCommentForCreate(stockId);
             await _commentRepo.CreateCommentAsync(commentModel);
             return CreatedAtAction(nameof(GetById), new {id = commentModel.Id}, commentModel.ToCommentDto());
         }

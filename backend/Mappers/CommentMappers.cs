@@ -20,7 +20,7 @@ namespace backend.Mappers
             };
         }
 
-        public static Comment ToComment(this CreateCommentDto commentDto, int stockId)
+        public static Comment ToCommentForCreate(this CreateCommentDto commentDto, int stockId)
         {
             return new Comment
             {
