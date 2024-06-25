@@ -13,6 +13,10 @@ namespace backend.Repository
     {
         private readonly ApplicationDBContext _context;
 
+        public CommentRepository()
+        {
+        }
+
         public CommentRepository(ApplicationDBContext context)
         {
             _context = context;
@@ -33,6 +37,19 @@ namespace backend.Repository
         public async Task<Comment?> GetCommentByIdAsync(int id)
         {
             return await _context.Comments.FindAsync(id);
+        }
+        
+        public async Task<Comment?> DeleteAsync(int id)
+        {
+            var commentModel = await _context.Comments.FirstOrDefaultAsync(x => x.Id == id);
+            if (commentModel != null)
+            {
+                return null;
+            }
+
+            _context.Comments.Remove(commentModel);
+            await _context.SaveChangesAsync();
+            return commentModel;
         }
     }
 }

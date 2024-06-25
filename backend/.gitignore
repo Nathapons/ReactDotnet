@@ -91,3 +91,5 @@ ScaffoldingReadMe.txt
 .idea/
 
 .fake
+
+appsettings.json

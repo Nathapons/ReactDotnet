@@ -13,5 +13,7 @@ namespace backend.Interfaces
         Task<Comment?> GetCommentByIdAsync(int id);
 
         Task<Comment> CreateCommentAsync(Comment comment);
+
+        Task<Comment?> DeleteAsync(int id);
     }
 }
