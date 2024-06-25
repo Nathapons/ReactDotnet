@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using backend.Dtos;
+using backend.Helpers;
 using backend.Models;
 
 namespace backend.Interfaces
 {
     public interface IStockReprository
     {
-        Task<List<Stock>> GetAllAsync();
+        Task<List<Stock>> GetAllAsync(QueryObject queryObject);
 
         Task<Stock?> GetByIdAsync(int id);
 
